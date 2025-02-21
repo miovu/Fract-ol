@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-SOURCES_FILES = create_window.c
+SOURCES_FILES = mlx_stuff.c fract_ol.c main.c 
 				
 SRC = $(addprefix $(SRC_DIR)/, $(SOURCES_FILES))
 

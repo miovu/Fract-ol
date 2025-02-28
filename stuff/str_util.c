@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 17:07:59 by miovu             #+#    #+#             */
-/*   Updated: 2025/02/27 22:54:28 by chillhoneyy      ###   ########.fr       */
+/*   Created: 2025/02/23 15:18:01 by chillhoneyy       #+#    #+#             */
+/*   Updated: 2025/02/23 15:24:38 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 #include "../fract_ol.h"
 
-int	main(int argc, char **argv)
+int ft_strncmp1(char *s1, char *s2, int n)
 {
-	t_fractal	fractal;
-	
-	if ((argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10))
-		|| (argc == 4 && !ft_strncmp(argv[1], "julia", 5)))
-	{
-		fractal.name = argv[1];
-		//1
-		fractal_init(&fractal);
-		//2
-		fractal_render(&fractal);
-		//3
-		mlx_loop(fractal.mlx_connection);
-	}
-	else
-	{
-		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+    if (s1 == NULL || s2 == NULL || n <= 0)
+        return (0);
+    while (*s1 == *s2 && n > 0 && *s1 != '\0')
+    {
+        ++s1;
+        ++s2;
+        --n;
+    }
+    return (*s1 - *s2);
+}
+
+void    putstr_fd1(char *s, int fd)
+{
+    if (*s == NULL || fd < 0)
+        return ;
+    if (*s)
+    {
+        write (fd, s, 1);
+        putstr_fd1(s + 1, fd);
+    }
 }

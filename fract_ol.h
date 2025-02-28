@@ -6,7 +6,7 @@
 /*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:22:45 by miovu             #+#    #+#             */
-/*   Updated: 2025/02/28 00:11:11 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/02/28 02:08:15 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define UP_HEX	"0123456789ABCDEF"
 # define DEC "0123456789"
 
-# define S_HEIGHT	800
-# define S_WIDTH	800
+# define S_HEIGHT	1000
+# define S_WIDTH	1000
 
 //use a square to keep rendering math simple
 # define ERROR_MESSAGE "ERROR\n"
@@ -44,6 +44,8 @@
 # include "includes/libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <errno.h>
 # include <limits.h>
 # include <stdio.h>
@@ -87,6 +89,9 @@ typedef struct s_fractal
 	//HOOKS VARIABLES
 	double	escape_value; //hipotnusa
 	int		iterations_definition; //value tight with the image quality and rendering speed
+	double	shift_x;
+	double	shift_y;
+	double	zoom;
 }				t_fractal;
 
 //main
@@ -104,5 +109,9 @@ void 		fractal_render(t_fractal *fractal);
 double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex   sum_complex(t_complex z1, t_complex z2);
 t_complex   square_complex(t_complex z);
+//events
+int    		close_handler(t_fractal *fractal);
+int			key_handler(int keysym, t_fractal *fractal);
+int 		mouse_handler(int button, t_fractal *fractal);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:09:41 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/02/27 23:48:00 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/02/28 00:58:32 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ double  map(double unscaled_num, double new_min, double new_max, double old_min,
 {
     //double old_min = 0; ---- norminette, depois podes tirar este parametro e trocar por 0
     return (new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min;
+    /* double result = (new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min;
+    printf("map(%f, %f, %f, %f, %f) = %f\n", unscaled_num, new_min, new_max, old_min, old_max, result);
+    return result; */
 }
 
 //somar os números complexos, adição de vetores

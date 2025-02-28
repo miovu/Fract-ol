@@ -6,7 +6,7 @@
 /*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:01:32 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/02/28 00:37:43 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/02/28 02:00:22 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,30 @@ void handel_pixel(int x, int y, t_fractal *fractal)
     t_complex   z;
     t_complex   c;
     int         i;
-    //int         color;
+    int         color;
 
     i = 0;
     //1ª iteração
     z.x = 0.0;
     z.y = 0.0;
     //as coordenadas x e y escladas pela função map para caber dentro do mandelbrot
-    c.x = map(x, -2, +2, 0, S_WIDTH);
-    c.y = map(y, +2, -2, 0, S_HEIGHT);
-    printf("Pixel (%d, %d) mapped to Complex (%f, %f)\n", x, y, c.x, c.y);
+    c.x = (map(x, -2, +2, 0, S_WIDTH) * fractal->zoom) + fractal->shift_x;
+    c.y = (map(y, +2, -2, 0, S_HEIGHT) * fractal->zoom) + fractal->shift_y;
+    //printf("Pixel (%d, %d) mapped to Complex (%f, %f)\n", x, y, c.x, c.y);
     //quantas vezes queremos iterar para ver se o ponto escapou do mandelbrot
     while (i < fractal->iterations_definition)
     {
-        printf("Iter %d: z = (%f, %f)\n", i, z.x, z.y);
+        //printf("Iter %d: z = (%f, %f)\n", i, z.x, z.y);
         z = sum_complex(square_complex(z), c);
         //se o valor escapou
         //se a hipotenusa(escape value) for maior que 2, o ponto escapou
         if (((z.x * z.x) + (z.y * z.y)) > fractal->escape_value)
         {
-            // color = map(i, BLACK, WHITE, 0, fractal->iterations_definition);
-            // my_pixel_put(x, y, &fractal->image, color);
-            // printf("Escaped at iteration %d for pixel (%d, %d)\n", i, x, y);
-            // return ;
-            break ;
+            color = map(i, BLACK, WHITE, 0, fractal->iterations_definition);
+            my_pixel_put(x, y, &fractal->image, color);
+            //printf("Escaped at iteration %d for pixel (%d, %d)\n", i, x, y);
+            return ;
+            //break ;
         }
         ++i;
     }

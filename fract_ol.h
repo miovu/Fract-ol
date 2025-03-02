@@ -6,7 +6,7 @@
 /*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:22:45 by miovu             #+#    #+#             */
-/*   Updated: 2025/02/28 02:08:15 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/03/02 21:59:54 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 
 # define LC_HEX "0123456789abcdef"
 # define UP_HEX	"0123456789ABCDEF"
-# define DEC "0123456789"
+# define DEC 	"0123456789"
 
 # define S_HEIGHT	1000
 # define S_WIDTH	1000
 
-//use a square to keep rendering math simple
 # define ERROR_MESSAGE "ERROR\n"
 
-//colors
+//COLORS
 //Basic
 # define BLACK	0x000000
 # define WHITE	0xFFFFFF
-# define RED		0xFF0000
+# define RED	0xFF0000
 # define GREEN	0x00FF00
 # define BLUE	0x0000FF
 //Others
 # define MAGENTA_BURST		0xFF0000
 # define LIME_SHOCK			0xCCFF00
-# define NEON_ORANGE			0xFF6600
+# define NEON_ORANGE		0xFF6600
 # define PSYCHEDELIC_PURPLE	0x660066
 # define AQUA_DREAM			0x33CCCC
 # define HOT_PINK			0xFF66B2
@@ -44,33 +43,24 @@
 # include "includes/libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <errno.h>
 # include <limits.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdarg.h>
-# include <ctype.h>
-# include <stdbool.h>
 # include <math.h>
 
-//VALUES
 typedef struct	s_complex
 {
-	// real
 	double	x;
-	// imaginary
 	double	y;
 }				t_complex;
 
-//IMAGE (estes valores estão na função mlx_get_data_addr())
+//IMAGE
 typedef struct s_image
 {
-	//values from mlx
-	void	*img_ptr; //pointer to image struct
-	char	*pixels_ptr; //points to the actual pixels - 1 byte
+	void	*img;
+	char	*pixels;
 	int		bpp;
 	int		endian;
 	int		line_len;
@@ -82,36 +72,40 @@ typedef struct s_fractal
 {
 	char	*name;
 	//MLX
-	void	*mlx_connection; //mlx_init()
-	void	*mlx_window; //mlx_window()
+	void	*mlx_connection;
+	void	*mlx_window;
 	//IMAGE
 	t_image	image;
 	//HOOKS VARIABLES
-	double	escape_value; //hipotnusa
-	int		iterations_definition; //value tight with the image quality and rendering speed
+	double	escape; //escape value
+	int		iterations; //iterations definition
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
 }				t_fractal;
 
-//main
-int			main(int argc, char **argv);
+
 //fract_ol
+int			main(int argc, char **argv);
+
 //init
 void		data_init(t_fractal *fractal);
-void		malloc_error();
+void		events_init(t_fractal *fractal);
 void		fractal_init(t_fractal *fractal);
+
 //render
 void		my_pixel_put(int x, int y, t_image *img, int color);
 void		handel_pixel(int x, int y, t_fractal *fractal);
 void 		fractal_render(t_fractal *fractal);
+
 //math_utils
-double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-t_complex   sum_complex(t_complex z1, t_complex z2);
-t_complex   square_complex(t_complex z);
+double 		scale(double unscaled_num, double new_min, double new_max, double old_max);
+t_complex   sum(t_complex a, t_complex b);
+t_complex   square(t_complex z);
+
 //events
 int    		close_handler(t_fractal *fractal);
 int			key_handler(int keysym, t_fractal *fractal);
-int 		mouse_handler(int button, t_fractal *fractal);
+int 		mouse_handler(int button, int x, int y, t_fractal *fractal);
 
 #endif

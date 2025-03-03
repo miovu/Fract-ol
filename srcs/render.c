@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 16:01:32 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/02 19:25:58 by chillhoneyy      ###   ########.fr       */
+/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
+/*   Updated: 2025/03/03 17:12:13 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//header
 
 #include "../fract_ol.h"
 
 void my_pixel_put(int x, int y, t_image *img, int color)
 {
-    int offset;
+    int result;
     
-    offset = (y * img->line_len) + (x * (img->bpp / 8));
-    *(unsigned int *)(img->pixels + offset) = color;
+    result = (y * img->line_len) + (x * (img->bpp / 8));
+    *(unsigned int *)(img->pixels + result) = color;
 }
 
 void handel_pixel(int x, int y, t_fractal *fractal)
@@ -39,13 +37,13 @@ void handel_pixel(int x, int y, t_fractal *fractal)
         z = sum(square(z), c);
         if (((z.x * z.x) + (z.y * z.y)) > fractal->escape)
         {
-            color = scale(i, BLACK, WHITE, fractal->iterations);
+            color = scale(i, PSYCHEDELIC_PURPLE, WHITE, fractal->iterations);
             my_pixel_put(x, y, &fractal->image, color);
             return ;
         }
         ++i;
     }
-    my_pixel_put(x, y, &fractal->image, PSYCHEDELIC_PURPLE);
+    my_pixel_put(x, y, &fractal->image, HOT_PINK);
 }
 
 void    fractal_render(t_fractal *fractal)

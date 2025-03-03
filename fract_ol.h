@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:22:45 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/02 21:59:54 by chillhoneyy      ###   ########.fr       */
+/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
+/*   Updated: 2025/03/03 18:12:30 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define UP_HEX	"0123456789ABCDEF"
 # define DEC 	"0123456789"
 
-# define S_HEIGHT	1000
-# define S_WIDTH	1000
+# define S_HEIGHT	800
+# define S_WIDTH	800
 
 # define ERROR_MESSAGE "ERROR\n"
 
@@ -105,7 +105,7 @@ t_complex   square(t_complex z);
 
 //events
 int    		close_handler(t_fractal *fractal);
-int			key_handler(int keysym, t_fractal *fractal);
+int 		key_handler(int key, t_fractal *fractal);
 int 		mouse_handler(int button, int x, int y, t_fractal *fractal);
 
 #endif

@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 16:09:41 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/02 18:49:02 by chillhoneyy      ###   ########.fr       */
+/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
+/*   Updated: 2025/03/03 15:12:00 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//header
 
 #include "../fract_ol.h"
 

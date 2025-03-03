@@ -3,62 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/02 22:04:03 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/03/03 19:21:29 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//HEADER
 
 #include "../fract_ol.h"
 
 int close_handler(t_fractal *fractal)
 {
     mlx_destroy_image(fractal->mlx_connection, fractal->image.img);
-    mlx_destroy_window(fractal->mlx_connection, fractal->mlx_connection);
+    mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
     mlx_destroy_display(fractal->mlx_connection);
     free(fractal->mlx_connection);
     exit(EXIT_SUCCESS);
 }
 
-int key_handler(int keysym, t_fractal *fractal)
+int key_handler(int key, t_fractal *fractal)
 {
-    if (keysym == XK_Escape)
+	/* printf("Key Pressed: %d\n", key); */
+    if (key == 65307)
         close_handler(fractal);
-    if (keysym == XK_Left)
+    if (key == 65361)
         fractal->shift_x += (0.5 * fractal->zoom);
-    else if (keysym == XK_Right)
+    else if (key == 65363)
         fractal->shift_x -= (0.5 * fractal->zoom);
-    else if (keysym == XK_Up)
+    else if (key == 65362)
         fractal->shift_y -= (0.5 * fractal->zoom);
-    else if (keysym == XK_Down)
+    else if (key == 65364)
         fractal->shift_y += (0.5 * fractal->zoom);
-    else if (keysym == XK_plus)
-        fractal->iterations += 10;
-    else if (keysym == XK_minus)
-        fractal->iterations -= 10;
-
+    else if (key == 65451)
+		fractal->iterations += 10;
+    else if (key == 65453)
+	{
+		if (fractal->iterations > 15)
+    		fractal->iterations -= 10;
+	}
     fractal_render(fractal);
     return (0);
 }
 
 int mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-    double  m_real;
-    double  m_imaginary;
-    double  zoom;
-    
-    m_real = (scale(x, -2, 2, S_WIDTH) * fractal->zoom) * fractal->shift_x;
-    m_imaginary = (scale(y, 2, -2, S_HEIGHT) * fractal->zoom) * fractal->shift_y;
-    if (button == Button5)
-        zoom = 0.95;
-    else if (button == Button4)
-        zoom = 0.05;
-    fractal->shift_x = m_real - (scale(x, -2, +2, S_WIDTH) * fractal->zoom * zoom);
-    fractal->shift_y = m_imaginary - (scale(y, +2, -2, S_HEIGHT) * fractal->zoom * zoom);
-    fractal->zoom *= zoom;
-    fractal_render(fractal);
+    // printf("Mouse Position: x = %d, y = %d\n", x, y);
+    double mouse_x, mouse_y;
+	double new_zoom;
+	
+	new_zoom = fractal->zoom;
+	mouse_x = scale(x, -2, 2, S_WIDTH);
+    mouse_y = scale(y, 2, -2, S_HEIGHT);
+	if (button == 4)
+	{
+		fractal->zoom *= 1.1;
+	}
+	else if (button == 5)
+	{
+		fractal->zoom *= 0.9;
+	}
+
+	fractal->shift_x += (mouse_x - fractal->shift_x) * (fractal->zoom / new_zoom);
+    fractal->shift_y += (mouse_y - fractal->shift_y) * (fractal->zoom / new_zoom);
+	fractal_render(fractal);
     return (0);
 }

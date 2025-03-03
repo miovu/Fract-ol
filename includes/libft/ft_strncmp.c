@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 17:25:18 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/02/27 22:45:00 by chillhoneyy      ###   ########.fr       */
+/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
+/*   Updated: 2025/03/03 14:22:32 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

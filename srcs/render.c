@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/03 17:12:13 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/05 19:31:17 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void my_pixel_put(int x, int y, t_image *img, int color)
     *(unsigned int *)(img->pixels + result) = color;
 }
 
-void handel_pixel(int x, int y, t_fractal *fractal)
+void handle_pixel(int x, int y, t_fractal *fractal)
 {
     t_complex   z;
     t_complex   c;
@@ -28,14 +28,15 @@ void handel_pixel(int x, int y, t_fractal *fractal)
     int         color;
 
     i = 0;
-    z.x = 0.0;
-    z.y = 0.0;
-    c.x = (scale(x, -2, +2, S_WIDTH) * fractal->zoom) + fractal->shift_x;
-    c.y = (scale(y, +2, -2, S_HEIGHT) * fractal->zoom) + fractal->shift_y;
+    z.real = 0.0;
+    z.im = 0.0;
+	
+    c.real = (scale(x, fractal->min, fractal->max, S_WIDTH) * fractal->zoom) + fractal->shift_x + fractal->mouse_x;
+    c.im = (scale(y, fractal->max, fractal->min, S_HEIGHT) * fractal->zoom) + fractal->shift_y + fractal->mouse_y;
     while (i < fractal->iterations)
     {
         z = sum(square(z), c);
-        if (((z.x * z.x) + (z.y * z.y)) > fractal->escape)
+        if (((z.real * z.real) + (z.im * z.im)) > fractal->escape)
         {
             color = scale(i, PSYCHEDELIC_PURPLE, WHITE, fractal->iterations);
             my_pixel_put(x, y, &fractal->image, color);
@@ -57,7 +58,7 @@ void    fractal_render(t_fractal *fractal)
         x = 0;
         while (x < S_WIDTH)
         {
-            handel_pixel(x, y, fractal);
+            handle_pixel(x, y, fractal);
             x++;
         }
         y++;

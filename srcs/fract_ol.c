@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/03 14:22:00 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/05 16:03:14 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
+		ft_printf("Mandelbrot\nJulia\n");
 		exit(EXIT_FAILURE);
 	}
 }

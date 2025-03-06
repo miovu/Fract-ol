@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/03 18:45:05 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/05 18:34:56 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void    data_init(t_fractal *fractal)
     fractal->shift_x = 0.0;
     fractal->shift_y = 0.0;
     fractal->zoom = 1.0;
+	fractal->max = 2.0;
+	fractal->min = -2.0;
+	fractal->mouse_x = 0;
+	fractal->mouse_y = 0;
 }
 
 void    events_init(t_fractal *fractal)

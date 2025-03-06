@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/03 18:12:30 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/05 18:12:23 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@
 # define S_WIDTH	800
 
 # define ERROR_MESSAGE "ERROR\n"
+
+//KEYS
+# define UP			65362
+# define DOWN		65364
+# define RIGHT		65363
+# define LEFT		65361
+# define MINUS		65453
+# define PLUS		65451
+# define ESC		65307
+# define ZOOM_IN	5
+# define ZOOM_OUT	4
 
 //COLORS
 //Basic
@@ -52,8 +63,8 @@
 
 typedef struct	s_complex
 {
-	double	x;
-	double	y;
+	double	real;
+	double	im;
 }				t_complex;
 
 //IMAGE
@@ -82,6 +93,10 @@ typedef struct s_fractal
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
+	double	max;
+	double	min;
+	double		mouse_x;
+	double		mouse_y;
 }				t_fractal;
 
 
@@ -95,7 +110,7 @@ void		fractal_init(t_fractal *fractal);
 
 //render
 void		my_pixel_put(int x, int y, t_image *img, int color);
-void		handel_pixel(int x, int y, t_fractal *fractal);
+void		handle_pixel(int x, int y, t_fractal *fractal);
 void 		fractal_render(t_fractal *fractal);
 
 //math_utils
@@ -106,6 +121,7 @@ t_complex   square(t_complex z);
 //events
 int    		close_handler(t_fractal *fractal);
 int 		key_handler(int key, t_fractal *fractal);
+//int			mouse_handler(int button, t_fractal *fractal);
 int 		mouse_handler(int button, int x, int y, t_fractal *fractal);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/03 15:12:00 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/05 15:38:51 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_complex   sum(t_complex a, t_complex b)
 {
     t_complex   result;
     
-    result.x = a.x + b.x;
-    result.y = a.y + b.y;
+    result.real = a.real + b.real;
+    result.im = a.im + b.im;
     return (result);
 }
 
@@ -30,7 +30,7 @@ t_complex   square(t_complex z)
 {
     t_complex   result;
     
-    result.x = (z.x * z.x) - (z.y * z.y);
-    result.y = 2 * z.x * z.y;
+    result.real = (z.real * z.real) - (z.im * z.im);
+    result.im = 2 * z.real * z.im;
     return (result);
 }

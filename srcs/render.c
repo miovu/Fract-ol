@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/05 19:31:17 by miovu            ###   ########.fr       */
+/*   Created: 2025/03/10 14:37:37 by miovu             #+#    #+#             */
+/*   Updated: 2025/03/10 18:13:28 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,31 @@ void my_pixel_put(int x, int y, t_image *img, int color)
 
 void handle_pixel(int x, int y, t_fractal *fractal)
 {
-    t_complex   z;
-    t_complex   c;
-    int         i;
-    int         color;
+    double	real;
+	double	im;
+	int		i;
+	int		color;
 
-    i = 0;
-    z.real = 0.0;
-    z.im = 0.0;
-	
-    c.real = (scale(x, fractal->min, fractal->max, S_WIDTH) * fractal->zoom) + fractal->shift_x + fractal->mouse_x;
-    c.im = (scale(y, fractal->max, fractal->min, S_HEIGHT) * fractal->zoom) + fractal->shift_y + fractal->mouse_y;
-    while (i < fractal->iterations)
-    {
-        z = sum(square(z), c);
-        if (((z.real * z.real) + (z.im * z.im)) > fractal->escape)
-        {
-            color = scale(i, PSYCHEDELIC_PURPLE, WHITE, fractal->iterations);
-            my_pixel_put(x, y, &fractal->image, color);
-            return ;
-        }
-        ++i;
-    }
-    my_pixel_put(x, y, &fractal->image, HOT_PINK);
+	real = scale(x, fractal->min, fractal->max, S_WIDTH) * fractal->zoom + fractal->shift_x;
+	im = scale(y, fractal->max, fractal->min, S_HEIGHT) * fractal->zoom + fractal->shift_y;
+	color = 0;
+	if (fractal->type == 0)
+	{
+		i = calculate_mandelbrot(real, im, fractal);
+		if (i == fractal->iterations)
+			color = HOT_PINK;
+		else
+			color = scale(i, PSYCHEDELIC_PURPLE, WHITE, fractal->iterations);
+	}
+	else if (fractal->type == 1)
+	{
+		i = calculate_julia(real, im, fractal);
+		if (i == fractal->iterations)
+			color = HOT_PINK;
+		else
+			color = scale(i, PSYCHEDELIC_PURPLE, WHITE, fractal->iterations);
+	}
+	my_pixel_put(x, y, &fractal->image, color);
 }
 
 void    fractal_render(t_fractal *fractal)

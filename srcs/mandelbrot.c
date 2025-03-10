@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol.c                                         :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/05 16:03:14 by miovu            ###   ########.fr       */
+/*   Created: 2025/03/10 11:58:14 by miovu             #+#    #+#             */
+/*   Updated: 2025/03/10 15:09:02 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fract_ol.h"
 
-int	main(int argc, char **argv)
+int	calculate_mandelbrot(double real, double im, t_fractal *fractal)
 {
-	t_fractal	fractal;
+	t_complex	z;
+	t_complex	c;
+	int			i;
 	
-	if ((argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10))
-		|| (argc == 4 && !ft_strncmp(argv[1], "julia", 5)))
+	z.real = 0.0;
+	z.im = 0.0;
+	c.real = real;
+	c.im = im;
+	i = 0;
+	while (i < fractal->iterations)
 	{
-		fractal.name = argv[1];
-		fractal_init(&fractal);
-		fractal_render(&fractal);
-		mlx_loop(fractal.mlx_connection);
+		z = sum(square(z), c);
+		if ((z.real * z.real + z.im * z.im) > fractal->escape)
+			return (i);
+		i++;
 	}
-	else
-	{
-		ft_printf("Mandelbrot\nJulia\n");
-		exit(EXIT_FAILURE);
-	}
+	return (fractal->iterations);
 }

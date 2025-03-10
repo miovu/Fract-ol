@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/05 18:34:56 by miovu            ###   ########.fr       */
+/*   Created: 2025/03/10 12:22:36 by miovu             #+#    #+#             */
+/*   Updated: 2025/03/10 16:03:58 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,8 @@ void    data_init(t_fractal *fractal)
     fractal->zoom = 1.0;
 	fractal->max = 2.0;
 	fractal->min = -2.0;
-	fractal->mouse_x = 0;
-	fractal->mouse_y = 0;
-}
-
-void    events_init(t_fractal *fractal)
-{
-    mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, key_handler, fractal);
-    mlx_mouse_hook(fractal->mlx_window, mouse_handler, fractal);
-    mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, close_handler, fractal);
+	//fractal->mouse_x = 0;
+	//fractal->mouse_y = 0;
 }
 
 void    fractal_init(t_fractal *fractal)

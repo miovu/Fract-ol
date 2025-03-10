@@ -4,7 +4,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-SOURCES_FILES = fract_ol.c init.c render.c math_utils.c events.c
+SOURCES_FILES = main.c init.c render.c math_utils.c mandelbrot.c julia.c \
+				parsing.c events.c color.c
 				
 SRC = $(addprefix $(SRC_DIR)/, $(SOURCES_FILES))
 

@@ -6,16 +6,12 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/05 18:12:23 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/10 18:11:42 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACT_OL_H
 # define FRACT_OL_H
-
-# define LC_HEX "0123456789abcdef"
-# define UP_HEX	"0123456789ABCDEF"
-# define DEC 	"0123456789"
 
 # define S_HEIGHT	800
 # define S_WIDTH	800
@@ -24,9 +20,13 @@
 
 //KEYS
 # define UP			65362
+# define W			119
 # define DOWN		65364
+# define S			115
 # define RIGHT		65363
+# define D			100
 # define LEFT		65361
+# define A			97
 # define MINUS		65453
 # define PLUS		65451
 # define ESC		65307
@@ -50,7 +50,6 @@
 # define ELETRIC_BLUE		0x0066FF
 # define LAVA_RED			0xFF3300
 
-
 # include "includes/libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
@@ -61,13 +60,12 @@
 # include <stdlib.h>
 # include <math.h>
 
-typedef struct	s_complex
+typedef struct s_complex
 {
 	double	real;
 	double	im;
 }				t_complex;
 
-//IMAGE
 typedef struct s_image
 {
 	void	*img;
@@ -77,17 +75,13 @@ typedef struct s_image
 	int		line_len;
 }				t_image;
 
-
-//FRACTAL ID
-typedef struct s_fractal
+typedef	struct s_fractal
 {
 	char	*name;
-	//MLX
+	int		type;
 	void	*mlx_connection;
 	void	*mlx_window;
-	//IMAGE
 	t_image	image;
-	//HOOKS VARIABLES
 	double	escape; //escape value
 	int		iterations; //iterations definition
 	double	shift_x;
@@ -95,33 +89,38 @@ typedef struct s_fractal
 	double	zoom;
 	double	max;
 	double	min;
-	double		mouse_x;
-	double		mouse_y;
+	t_complex	J;
+	//double	mouse_x;
+	//double	mouse_y;
 }				t_fractal;
 
-
-//fract_ol
+//Main
 int			main(int argc, char **argv);
-
-//init
-void		data_init(t_fractal *fractal);
-void		events_init(t_fractal *fractal);
-void		fractal_init(t_fractal *fractal);
-
-//render
-void		my_pixel_put(int x, int y, t_image *img, int color);
-void		handle_pixel(int x, int y, t_fractal *fractal);
-void 		fractal_render(t_fractal *fractal);
-
-//math_utils
-double 		scale(double unscaled_num, double new_min, double new_max, double old_max);
+//Parsing
+int			error_message(void);
+void		fractal_parsing(int argc, char **argv, t_fractal *fractal);
+//Mandelbrot
+int			calculate_mandelbrot(double real, double im, t_fractal *fractal);
+//Julia
+double		ft_atof(const char *str, double result, double sign, double decimal);
+int			calculate_julia(double real, double im, t_fractal *fractal);
+//Other fractal
+//Math_utils
+double  	scale(double unscaled_num, double new_min, double new_max, double old_max);
 t_complex   sum(t_complex a, t_complex b);
 t_complex   square(t_complex z);
-
-//events
-int    		close_handler(t_fractal *fractal);
+//Init
+void    	data_init(t_fractal *fractal);
+void    	fractal_init(t_fractal *fractal);
+//Render
+void 		my_pixel_put(int x, int y, t_image *img, int color);
+void 		handle_pixel(int x, int y, t_fractal *fractal);
+void   		fractal_render(t_fractal *fractal);
+//Events
+void    	events_init(t_fractal *fractal);
+int 		close_handler(t_fractal *fractal);
 int 		key_handler(int key, t_fractal *fractal);
-//int			mouse_handler(int button, t_fractal *fractal);
-int 		mouse_handler(int button, int x, int y, t_fractal *fractal);
+//Color
+void		color(int color_code, int *pixel);
 
 #endif

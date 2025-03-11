@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/10 18:11:42 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/11 17:36:40 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define S_WIDTH	800
 
 # define ERROR_MESSAGE "ERROR\n"
+
+# define PI 3.14159265358979323846
 
 //KEYS
 # define UP			65362
@@ -32,6 +34,7 @@
 # define ESC		65307
 # define ZOOM_IN	5
 # define ZOOM_OUT	4
+# define C			99
 
 //COLORS
 //Basic
@@ -49,6 +52,12 @@
 # define HOT_PINK			0xFF66B2
 # define ELETRIC_BLUE		0x0066FF
 # define LAVA_RED			0xFF3300
+# define DEEP_PURPLE 0x5D1F6E   // Deep Purple
+# define DARK_GREEN  0x0A4F2D   // Dark Green
+# define ELECTRIC_BLUE 0x0066FF // Electric Blue
+# define NEON_PINK   0xFF0099   // Neon Pink
+# define VIVID_TURQUOISE 0x00B3B3 // Vivid Turquoise
+# define DARK_RED    0x9E0E0E   // Dark Red
 
 # include "includes/libft/libft.h"
 # include "minilibx-linux/mlx.h"
@@ -65,6 +74,15 @@ typedef struct s_complex
 	double	real;
 	double	im;
 }				t_complex;
+
+typedef struct s_color
+{
+	float	norm;
+	float	red;
+	float	green;
+	float	blue;
+}				t_color;
+
 
 typedef struct s_image
 {
@@ -90,6 +108,7 @@ typedef	struct s_fractal
 	double	max;
 	double	min;
 	t_complex	J;
+	t_color		color;
 	//double	mouse_x;
 	//double	mouse_y;
 }				t_fractal;
@@ -114,13 +133,13 @@ void    	data_init(t_fractal *fractal);
 void    	fractal_init(t_fractal *fractal);
 //Render
 void 		my_pixel_put(int x, int y, t_image *img, int color);
-void 		handle_pixel(int x, int y, t_fractal *fractal);
-void   		fractal_render(t_fractal *fractal);
+void 		handle_pixel(int x, int y, t_fractal *fractal, double time);
+void    	fractal_render(t_fractal *fractal, double time);
 //Events
 void    	events_init(t_fractal *fractal);
 int 		close_handler(t_fractal *fractal);
 int 		key_handler(int key, t_fractal *fractal);
 //Color
-void		color(int color_code, int *pixel);
+int			calculate_color(int i, double time, t_fractal *fractal, t_color *color);
 
 #endif

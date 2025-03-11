@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:22:36 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/10 16:03:58 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:05:06 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    data_init(t_fractal *fractal)
 {
     fractal->escape = 4;  //2^2 hypotnusa
-    fractal->iterations = 30;
+    fractal->iterations = 100;
     fractal->shift_x = 0.0;
     fractal->shift_y = 0.0;
     fractal->zoom = 1.0;

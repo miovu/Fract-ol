@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/11 17:36:40 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/13 17:04:40 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@
 # define ESC		65307
 # define ZOOM_IN	5
 # define ZOOM_OUT	4
-# define C			99
+# define ONE		49
+# define TWO		50
+# define THREE		51
 
 //COLORS
 //Basic
@@ -77,12 +79,17 @@ typedef struct s_complex
 
 typedef struct s_color
 {
-	float	norm;
-	float	red;
-	float	green;
-	float	blue;
+	int		red;
+	int		green;
+	int		blue;
 }				t_color;
 
+typedef	struct s_palette
+{
+	int		palette_1;
+	int		palette_2;
+	int		palette_3;
+}				t_palette;
 
 typedef struct s_image
 {
@@ -97,6 +104,7 @@ typedef	struct s_fractal
 {
 	char	*name;
 	int		type;
+	int		typel;
 	void	*mlx_connection;
 	void	*mlx_window;
 	t_image	image;
@@ -109,6 +117,7 @@ typedef	struct s_fractal
 	double	min;
 	t_complex	J;
 	t_color		color;
+	t_palette	palette;
 	//double	mouse_x;
 	//double	mouse_y;
 }				t_fractal;
@@ -123,7 +132,8 @@ int			calculate_mandelbrot(double real, double im, t_fractal *fractal);
 //Julia
 double		ft_atof(const char *str, double result, double sign, double decimal);
 int			calculate_julia(double real, double im, t_fractal *fractal);
-//Other fractal
+//Phoenix
+int			calculate_phoenix(double real, double im, t_fractal *fractal);
 //Math_utils
 double  	scale(double unscaled_num, double new_min, double new_max, double old_max);
 t_complex   sum(t_complex a, t_complex b);
@@ -133,13 +143,15 @@ void    	data_init(t_fractal *fractal);
 void    	fractal_init(t_fractal *fractal);
 //Render
 void 		my_pixel_put(int x, int y, t_image *img, int color);
-void 		handle_pixel(int x, int y, t_fractal *fractal, double time);
-void    	fractal_render(t_fractal *fractal, double time);
+void 		handle_pixel(int x, int y, t_fractal *fractal);
+void    	fractal_render(t_fractal *fractal);
 //Events
 void    	events_init(t_fractal *fractal);
 int 		close_handler(t_fractal *fractal);
 int 		key_handler(int key, t_fractal *fractal);
 //Color
-int			calculate_color(int i, double time, t_fractal *fractal, t_color *color);
+int			palette_1(int i, t_fractal *fractal);
+// int			palette_2(int i, t_fractal *fractal);
+// int			palette_3(int i, t_fractal *fractal);
 
 #endif

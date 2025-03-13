@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:37:37 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/11 18:08:47 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/13 17:04:26 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void my_pixel_put(int x, int y, t_image *img, int color)
     *(unsigned int *)(img->pixels + result) = color;
 }
 
-void handle_pixel(int x, int y, t_fractal *fractal, double time)
+void handle_pixel(int x, int y, t_fractal *fractal)
 {
-	t_color	c;
     double	real;
 	double	im;
 	int		i;
@@ -35,15 +34,17 @@ void handle_pixel(int x, int y, t_fractal *fractal, double time)
 	if (fractal->type == 0)
 		i = calculate_mandelbrot(real, im, fractal);
 	else if (fractal->type == 1)
+		i = calculate_phoenix(real, im, fractal);
+	else if (fractal->type == 2)
 		i = calculate_julia(real, im, fractal);
 	if (i == fractal->iterations)
 		color = BLACK;
 	else
-		color = calculate_color(i, time, fractal, &c);
+        color = palette_1(i, fractal); 
 	my_pixel_put(x, y, &fractal->image, color);
 }
 
-void    fractal_render(t_fractal *fractal, double time)
+void    fractal_render(t_fractal *fractal)
 {
     int x;
     int y;
@@ -54,7 +55,7 @@ void    fractal_render(t_fractal *fractal, double time)
         x = 0;
         while (x < S_WIDTH)
         {
-            handle_pixel(x, y, fractal, time);
+            handle_pixel(x, y, fractal);
             x++;
         }
         y++;

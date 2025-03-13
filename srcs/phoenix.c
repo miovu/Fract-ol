@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   phoenix.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 11:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/12 16:05:48 by miovu            ###   ########.fr       */
+/*   Created: 2025/03/13 15:02:37 by miovu             #+#    #+#             */
+/*   Updated: 2025/03/13 17:03:47 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fract_ol.h"
 
-int	calculate_mandelbrot(double real, double im, t_fractal *fractal)
+int	calculate_phoenix(double real, double im, t_fractal *fractal)
 {
 	t_complex	z;
-	t_complex	c;
+	double		temp;
 	int			i;
-	
-	z.real = 0.0;
-	z.im = 0.0;
-	c.real = real;
-	c.im = im;
+
+	z.real = real;
+	z.im = im;
 	i = 0;
 	while (i < fractal->iterations)
 	{
-		z = sum(square(z), c);
+		temp = z.real;
+		z.real = (z.real * z.real * z.real) - (3 * z.real * z.im * z.im) + real;
+		z.im = (3 * temp * temp * z.im) - (z.im * z.im * z.im) + z.im;
 		if ((z.real * z.real + z.im * z.im) > fractal->escape)
 			return (i);
 		i++;

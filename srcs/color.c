@@ -5,35 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 18:06:21 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/11 18:01:02 by miovu            ###   ########.fr       */
+/*   Created: 2025/03/13 14:21:34 by miovu             #+#    #+#             */
+/*   Updated: 2025/03/13 14:59:09 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fract_ol.h"
 
-int	calculate_color(int i, double time, t_fractal *fractal, t_color *c)
+int	palette_1(int i, t_fractal *fractal)
 {
-	int	color;
-	double	mu;
-	float color_shift;
+	double	t;
 	
-	if (i == fractal->iterations)
-		return (BLACK);
-	color_shift = sin(time + fractal->color.norm);
-	mu = (double)i - log(log2(fabs(i + 1 - log2(log2(abs(i + 1))))));
-	c->norm = mu / (float)fractal->iterations;
-	c->norm = pow(c->norm, 0.5);
-	
-	c->red = fractal->color.red + 0.5 * cos(6.0 * PI * (c->norm + color_shift) + time);
-	c->green = fractal->color.green + 0.5 * cos(6.0 * PI * (c->norm + 0.33 + color_shift) + time);
-	c->blue = fractal->color.blue + 0.5 * cos(6.0 * PI * (c->norm + 0.66 + color_shift) + time);
-
-	c->red = fmin(fmax(c->red, 0.0), 1.0);
-    c->green = fmin(fmax(c->green, 0.0), 1.0);
-    c->blue = fmin(fmax(c->blue, 0.0), 1.0);
-
-	color = ((int)(c->red * 255) << 16) | ((int)(c->green * 255) << 8)
-			| ((int)(c->blue * 255));
-	return (color);
+	t = (double)i / fractal->iterations;
+	fractal->color.red = (int)(9 * (1 - t) * t * t * t * 255);
+	fractal->color.green = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	fractal->color.blue = (int)(8.5 * (1 - t) * ( 1 - t) * (1 - t) * t * 255);
+	return (fractal->color.red << 16 | fractal->color.green << 8 | fractal->color.blue);
 }
+
+// int	palette_2(int i, t_fractal *fractal)
+// {
+// 	double	t;
+
+// 	t = (double)i / fractal->iterations;
+// 	fractal->color.red = (int)(255 * t);
+// 	fractal->color.green = 0;
+// 	fractal->color.blue = (int)(255 * (1 - t));
+// 	return (fractal->color.red << 16 | fractal->color.green << 8 | fractal->color.blue);
+// }
+
+// int	palette_3(int i, t_fractal *fractal)
+// {
+// 	double	t;
+
+// 	t = (double)i / fractal->iterations;
+// 	fractal->color.red = (int)(128 * (sin(t * 6.0) + 1));
+// 	fractal->color.green = (int)(128 * (cos(t * 4.0) + 1));
+// 	fractal->color.blue = (int)(128 * (sin(t * 2.0) + 1));
+// 	return (fractal->color.red << 16 | fractal->color.green << 8 | fractal->color.blue);
+// }

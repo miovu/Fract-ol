@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:37:37 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/13 17:04:26 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/15 16:32:03 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void handle_pixel(int x, int y, t_fractal *fractal)
 	i = 0;
 	if (fractal->type == 0)
 		i = calculate_mandelbrot(real, im, fractal);
-	else if (fractal->type == 1)
-		i = calculate_phoenix(real, im, fractal);
+    else if (fractal->type == 1)
+        i = calculate_julia(real, im, fractal);
 	else if (fractal->type == 2)
-		i = calculate_julia(real, im, fractal);
+		i = calculate_phoenix(real, im, fractal);
 	if (i == fractal->iterations)
 		color = BLACK;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:22:36 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/13 14:49:20 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/15 17:41:57 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    data_init(t_fractal *fractal)
 {
     fractal->escape = 4;  //2^2 hypotnusa
-    fractal->iterations = 100;
+    fractal->iterations = 200;
     fractal->shift_x = 0.0;
     fractal->shift_y = 0.0;
     fractal->zoom = 1.0;

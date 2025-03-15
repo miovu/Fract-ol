@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/13 17:04:40 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/15 17:07:41 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ typedef	struct s_fractal
 	double	zoom;
 	double	max;
 	double	min;
+	double	inp1;//real part
+	double	inp2;//im part
+	double	inp3;//multiplied 
 	t_complex	J;
 	t_color		color;
 	t_palette	palette;

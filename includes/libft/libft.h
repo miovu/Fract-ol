@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:16:01 by miovu             #+#    #+#             */
-/*   Updated: 2025/01/29 20:42:15 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/19 17:36:22 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
+double	ft_atof(const char *str, double result, double sign, double	decimal);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 //Part II

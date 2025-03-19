@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/13 14:59:25 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/19 17:31:39 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int key_handler(int key, t_fractal *fractal)
 		if (fractal->iterations > 15)
     		fractal->iterations -= 10;
 	}
+	else if (key == ONE)
+		fractal->palette = 1;
+	else if (key == TWO)
+		fractal->palette = 2;
+	else if (key == THREE)
+		fractal->palette = 3;
 	fractal_render(fractal);
     return (0);
 }

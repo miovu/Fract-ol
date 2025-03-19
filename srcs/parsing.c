@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:19:03 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/15 17:34:36 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/03/17 16:44:44 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,9 @@ void	fractal_parsing(int argc, char **argv, t_fractal *fractal)
 			fractal->J.real = ft_atof(argv[2], 0.0, 1.0, 1.0);
 			fractal->J.im = ft_atof(argv[3], 0.0, 1.0, 1.0);
 		}
-	else if (argc == 5 && (!ft_strncmp(argv[1], "Phoenix", 8)))
-		{
-			fractal->type = 2;
-			fractal->inp1 = ft_atof(argv[2], 0.0, 1.0, 1.0);
-			fractal->inp2 = ft_atof(argv[3], 0.0, 1.0, 1.0);
-			fractal->inp3 = ft_atof(argv[4], 0.0, 1.0, 1.0);
-		}
+	else if (argc == 3 && (!ft_strncmp(argv[1], "Burning", 7))
+			&& (!ft_strncmp(argv[2], "Ship", 4)))
+		fractal->type = 2;
 	else
 	{
 		error_message();

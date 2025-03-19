@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:37:37 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/15 16:32:03 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/03/19 17:30:29 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,22 @@ void handle_pixel(int x, int y, t_fractal *fractal)
 {
     double	real;
 	double	im;
-	int		i;
 	int		color;
 
 	real = scale(x, fractal->min, fractal->max, S_WIDTH) * fractal->zoom + fractal->shift_x;
-	im = scale(y, fractal->max, fractal->min, S_HEIGHT) * fractal->zoom + fractal->shift_y;
+	im = scale(y, fractal->min, fractal->max, S_HEIGHT) * fractal->zoom + fractal->shift_y;
 	color = 0;
-	i = 0;
+	fractal->i = 0;
 	if (fractal->type == 0)
-		i = calculate_mandelbrot(real, im, fractal);
+		fractal->i = calculate_mandelbrot(real, im, fractal);
     else if (fractal->type == 1)
-        i = calculate_julia(real, im, fractal);
+        fractal->i = calculate_julia(real, im, fractal);
 	else if (fractal->type == 2)
-		i = calculate_phoenix(real, im, fractal);
-	if (i == fractal->iterations)
+		fractal->i = calculate_burning_ship(real, im, fractal);
+	if (fractal->i == fractal->iterations)
 		color = BLACK;
 	else
-        color = palette_1(i, fractal); 
+        color = chose_palette(fractal->palette, fractal);
 	my_pixel_put(x, y, &fractal->image, color);
 }
 

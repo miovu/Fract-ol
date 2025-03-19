@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
+/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/15 17:07:41 by chillhoneyy      ###   ########.fr       */
+/*   Updated: 2025/03/19 17:40:47 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # define S_WIDTH	800
 
 # define ERROR_MESSAGE "ERROR\n"
-
-# define PI 3.14159265358979323846
 
 //KEYS
 # define UP			65362
@@ -39,28 +37,13 @@
 # define THREE		51
 
 //COLORS
-//Basic
 # define BLACK	0x000000
 # define WHITE	0xFFFFFF
 # define RED	0xFF0000
 # define GREEN	0x00FF00
 # define BLUE	0x0000FF
-//Others
-# define MAGENTA_BURST		0xFF0000
-# define LIME_SHOCK			0xCCFF00
-# define NEON_ORANGE		0xFF6600
-# define PSYCHEDELIC_PURPLE	0x660066
-# define AQUA_DREAM			0x33CCCC
-# define HOT_PINK			0xFF66B2
-# define ELETRIC_BLUE		0x0066FF
-# define LAVA_RED			0xFF3300
-# define DEEP_PURPLE 0x5D1F6E   // Deep Purple
-# define DARK_GREEN  0x0A4F2D   // Dark Green
-# define ELECTRIC_BLUE 0x0066FF // Electric Blue
-# define NEON_PINK   0xFF0099   // Neon Pink
-# define VIVID_TURQUOISE 0x00B3B3 // Vivid Turquoise
-# define DARK_RED    0x9E0E0E   // Dark Red
 
+//LIBRARYS
 # include "includes/libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
@@ -71,12 +54,14 @@
 # include <stdlib.h>
 # include <math.h>
 
+//COMPLEX
 typedef struct s_complex
 {
 	double	real;
 	double	im;
 }				t_complex;
 
+//COLOR
 typedef struct s_color
 {
 	int		red;
@@ -84,13 +69,7 @@ typedef struct s_color
 	int		blue;
 }				t_color;
 
-typedef	struct s_palette
-{
-	int		palette_1;
-	int		palette_2;
-	int		palette_3;
-}				t_palette;
-
+//IMAGE
 typedef struct s_image
 {
 	void	*img;
@@ -100,6 +79,7 @@ typedef struct s_image
 	int		line_len;
 }				t_image;
 
+//FRACTAL
 typedef	struct s_fractal
 {
 	char	*name;
@@ -110,51 +90,49 @@ typedef	struct s_fractal
 	t_image	image;
 	double	escape; //escape value
 	int		iterations; //iterations definition
+	int		i; // number of interactions
+	int		palette; // for color palettes
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
 	double	max;
 	double	min;
-	double	inp1;//real part
-	double	inp2;//im part
-	double	inp3;//multiplied 
 	t_complex	J;
 	t_color		color;
-	t_palette	palette;
 	//double	mouse_x;
 	//double	mouse_y;
 }				t_fractal;
 
-//Main
+//MAIN
 int			main(int argc, char **argv);
-//Parsing
+//PARSING
 int			error_message(void);
 void		fractal_parsing(int argc, char **argv, t_fractal *fractal);
-//Mandelbrot
+//MANDELBROT
 int			calculate_mandelbrot(double real, double im, t_fractal *fractal);
-//Julia
-double		ft_atof(const char *str, double result, double sign, double decimal);
+//JULIA
 int			calculate_julia(double real, double im, t_fractal *fractal);
-//Phoenix
-int			calculate_phoenix(double real, double im, t_fractal *fractal);
-//Math_utils
+//BURNING SHIP
+int			calculate_burning_ship(double real, double im, t_fractal *fractal);
+//MATH_UTILS
 double  	scale(double unscaled_num, double new_min, double new_max, double old_max);
 t_complex   sum(t_complex a, t_complex b);
 t_complex   square(t_complex z);
-//Init
+//INIT
 void    	data_init(t_fractal *fractal);
 void    	fractal_init(t_fractal *fractal);
-//Render
+//RENDER
 void 		my_pixel_put(int x, int y, t_image *img, int color);
 void 		handle_pixel(int x, int y, t_fractal *fractal);
 void    	fractal_render(t_fractal *fractal);
-//Events
+//EVENTS
 void    	events_init(t_fractal *fractal);
 int 		close_handler(t_fractal *fractal);
 int 		key_handler(int key, t_fractal *fractal);
-//Color
-int			palette_1(int i, t_fractal *fractal);
-// int			palette_2(int i, t_fractal *fractal);
-// int			palette_3(int i, t_fractal *fractal);
+//COLOR
+int			palette_1(t_fractal *fractal);
+int			palette_2(t_fractal *fractal);
+int			palette_3(t_fractal *fractal);
+int			chose_palette(int palette, t_fractal *fractal);
 
 #endif

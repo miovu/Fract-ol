@@ -6,13 +6,14 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/19 17:40:47 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/24 17:42:01 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACT_OL_H
 # define FRACT_OL_H
 
+//WINDOW
 # define S_HEIGHT	800
 # define S_WIDTH	800
 
@@ -80,27 +81,26 @@ typedef struct s_image
 }				t_image;
 
 //FRACTAL
-typedef	struct s_fractal
+typedef struct s_fractal
 {
-	char	*name;
-	int		type;
-	int		typel;
-	void	*mlx_connection;
-	void	*mlx_window;
-	t_image	image;
-	double	escape; //escape value
-	int		iterations; //iterations definition
-	int		i; // number of interactions
-	int		palette; // for color palettes
-	double	shift_x;
-	double	shift_y;
-	double	zoom;
-	double	max;
-	double	min;
-	t_complex	J;
+	char		*name;
+	int			type;
+	void		*mlx_connection;
+	void		*mlx_window;
+	int			iterations; //iterations definition
+	int			i; //number of interations
+	int			palette; //for color palettes
+	double		escape; //escape value
+	double		shift_x;
+	double		shift_y;
+	double		zoom;
+	double		max;
+	double		min;
+	double		mouse_x;
+	double		mouse_y;
+	t_complex	julia;
 	t_color		color;
-	//double	mouse_x;
-	//double	mouse_y;
+	t_image		image;
 }				t_fractal;
 
 //MAIN
@@ -115,24 +115,25 @@ int			calculate_julia(double real, double im, t_fractal *fractal);
 //BURNING SHIP
 int			calculate_burning_ship(double real, double im, t_fractal *fractal);
 //MATH_UTILS
-double  	scale(double unscaled_num, double new_min, double new_max, double old_max);
-t_complex   sum(t_complex a, t_complex b);
-t_complex   square(t_complex z);
+double		scale(double nbr, double new_min, double new_max, double old_max);
+t_complex	sum(t_complex a, t_complex b);
+t_complex	square(t_complex z);
 //INIT
-void    	data_init(t_fractal *fractal);
-void    	fractal_init(t_fractal *fractal);
+void		data_init(t_fractal *fractal);
+void		fractal_init(t_fractal *fractal);
 //RENDER
-void 		my_pixel_put(int x, int y, t_image *img, int color);
-void 		handle_pixel(int x, int y, t_fractal *fractal);
-void    	fractal_render(t_fractal *fractal);
+void		my_pixel_put(int x, int y, t_image *img, int color);
+void		handle_pixel(int x, int y, t_fractal *fractal);
+void		fractal_render(t_fractal *fractal);
 //EVENTS
-void    	events_init(t_fractal *fractal);
-int 		close_handler(t_fractal *fractal);
-int 		key_handler(int key, t_fractal *fractal);
+void		events_init(t_fractal *fractal);
+int			close_handler(t_fractal *fractal);
+int			key_handler(int key, t_fractal *fractal);
+int			mouse_handler(int x, int y, int key, t_fractal *fractal);
 //COLOR
 int			palette_1(t_fractal *fractal);
 int			palette_2(t_fractal *fractal);
 int			palette_3(t_fractal *fractal);
-int			chose_palette(int palette, t_fractal *fractal);
+int			chose_palette(t_fractal *fractal);
 
 #endif

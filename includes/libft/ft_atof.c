@@ -6,13 +6,13 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:22:36 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/19 17:36:00 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/20 12:43:10 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double	ft_atof(const char *str, double result, double sign, double	decimal)
+double	ft_atof(const char *str, double result, double sign, double decimal)
 {
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
@@ -32,7 +32,8 @@ double	ft_atof(const char *str, double result, double sign, double	decimal)
 		str++;
 		while (*str >= '0' && *str <= '9')
 		{
-			result = result + (*str - '0') / (decimal *= 10);
+			decimal *= 10;
+			result = result + (*str - '0') / decimal;
 			str++;
 		}
 	}

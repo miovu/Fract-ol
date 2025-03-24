@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:19:03 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/17 16:44:44 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/20 16:12:07 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,23 @@ int	error_message(void)
 void	fractal_parsing(int argc, char **argv, t_fractal *fractal)
 {
 	if (argc == 2 && (!ft_strncmp(argv[1], "Mandelbrot", 10)))
+	{
+		fractal->name = "Mandelbrot";
 		fractal->type = 0;
+	}
 	else if (argc == 4 && (!ft_strncmp(argv[1], "Julia", 5)))
-		{
-			fractal->type = 1;
-			fractal->J.real = ft_atof(argv[2], 0.0, 1.0, 1.0);
-			fractal->J.im = ft_atof(argv[3], 0.0, 1.0, 1.0);
-		}
+	{
+		fractal->name = "Julia";
+		fractal->type = 1;
+		fractal->julia.real = ft_atof(argv[2], 0.0, 1.0, 1.0);
+		fractal->julia.im = ft_atof(argv[3], 0.0, 1.0, 1.0);
+	}
 	else if (argc == 3 && (!ft_strncmp(argv[1], "Burning", 7))
-			&& (!ft_strncmp(argv[2], "Ship", 4)))
+		&& (!ft_strncmp(argv[2], "Ship", 4)))
+	{
+		fractal->name = "Burning Ship";
 		fractal->type = 2;
+	}
 	else
 	{
 		error_message();

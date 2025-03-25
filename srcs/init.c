@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:22:36 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/24 18:12:37 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/25 15:22:15 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	data_init(t_fractal *fractal)
 	fractal->max = 2.0;
 	fractal->min = -2.0;
 	fractal->palette = 1;
-	fractal->mouse_x = 1;
-	fractal->mouse_y = 1;
+	// fractal->mouse_x = 0;
+	// fractal->mouse_y = 0;
 }
 
 void	fractal_init(t_fractal *fractal)

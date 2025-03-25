@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/03/24 17:42:01 by miovu            ###   ########.fr       */
+/*   Updated: 2025/03/25 15:22:20 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct s_fractal
 	double		zoom;
 	double		max;
 	double		min;
-	double		mouse_x;
-	double		mouse_y;
+	// double		mouse_x;
+	// double		mouse_y;
 	t_complex	julia;
 	t_color		color;
 	t_image		image;

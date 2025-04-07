@@ -48,6 +48,6 @@ fclean: clean
 	@rm -rf $(NAME)
 
 re: fclean all
-	@echo "Rebuilded!"
+	@echo "Rebuilt!"
 
 .PHONY: all clean fclean re

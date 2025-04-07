@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/25 15:21:47 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/07 16:11:11 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,19 @@ int	key_handler(int key, t_fractal *fractal)
 
 int	mouse_handler(int key, int x, int y, t_fractal *fractal)
 {
-	double	old_zoom;
-	double	old_min;
-	double	old_max;
+	double	zoom_factor;
 	double	mouse_real;
 	double	mouse_im;
 	
-	old_zoom = fractal->zoom;
-	old_min = fractal->min;
-	old_max = fractal->max;
-	mouse_real = scale(x, fractal->min, fractal->max, S_WIDTH) + fractal->shift_x;
-	mouse_im = scale(y, fractal->min, fractal->max, S_HEIGHT) + fractal->shift_y;
-	if (key == ZOOM_IN)
-	{
-		fractal->zoom *= 1.10;
-		// fractal->min = (fractal->zoom * old_zoom) / old_min;
-		// fractal->max = (fractal->zoom * old_zoom) / old_max;
-	}
-	else if (key == ZOOM_OUT)
-	{
-		fractal->zoom *= 0.90;
-		// fractal->min = (fractal->zoom * old_zoom) / old_min;
-		// fractal->max = (fractal->zoom * old_zoom) / old_max;
-	}
-	// fractal->min = mouse_real - (mouse_real - fractal->min) * (fractal->zoom / old_zoom);
-	// fractal->max = mouse_im - (mouse_im - fractal->max) * (fractal->zoom / old_zoom);
+	zoom_factor = 0.0;
+	mouse_real = (double)x / (S_WIDTH / (fractal->max - fractal->min)) + fractal->min + fractal->shift_x;
+	mouse_im = (double)y / (S_HEIGHT / (fractal->max - fractal->min)) + fractal->min + fractal->shift_y;
+	if (key == ZOOM_OUT)
+		zoom_factor = 0.9;
+	else if (key == ZOOM_IN)
+		zoom_factor = 1.1;
+	fractal->min = mouse_real - (mouse_real - fractal->min) * zoom_factor;
+	fractal->max = mouse_real + (fractal->max - mouse_real) * zoom_factor;
 	fractal_render(fractal);
 	return (0);
 }

@@ -1,7 +1,7 @@
 NAME = fract_ol
 
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CC = gcc
+CFLAGS = -O3 -march=native -flto -ftree-vectorize -funroll-loops
 MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 SOURCES_FILES = main.c init.c render.c math_utils.c mandelbrot.c julia.c \

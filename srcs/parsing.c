@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:19:03 by miovu             #+#    #+#             */
-/*   Updated: 2025/04/07 16:18:52 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/07 16:20:48 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	error_message(void)
 	write(1, "\033[0m\t./fract_ol <Chosen Fractal>\n", 33);
 	write(1, "\033[1;34mAvaliable Fractals:\n[0m", 27);
 	write(1, "\033[0m\t-Mandelbrot\n", 17);
-	write(1, "\033[0m\t-Julia\n", 12);
 	write(1, "\033[0m\t-Burning Ship\n", 19);
+	write(1, "\033[0m\t-Julia\n", 12);
 	exit(EXIT_FAILURE);
 	return (0);
 }

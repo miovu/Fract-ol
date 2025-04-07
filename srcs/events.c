@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/04/07 16:11:11 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/07 16:38:08 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	mouse_handler(int key, int x, int y, t_fractal *fractal)
 	else if (key == ZOOM_IN)
 		zoom_factor = 1.1;
 	fractal->min = mouse_real - (mouse_real - fractal->min) * zoom_factor;
-	fractal->max = mouse_real + (fractal->max - mouse_real) * zoom_factor;
+	fractal->max = mouse_im + (fractal->max - mouse_im) * zoom_factor;
 	fractal_render(fractal);
 	return (0);
 }

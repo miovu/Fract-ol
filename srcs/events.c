@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/04/07 16:38:08 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/07 17:31:49 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,35 @@ int	key_handler(int key, t_fractal *fractal)
 	return (0);
 }
 
+double	interpolate(double target, double current, double factor)
+{
+	return (1 - factor) * target + factor * current;
+}
+
 int	mouse_handler(int key, int x, int y, t_fractal *fractal)
 {
 	double	zoom_factor;
 	double	mouse_real;
 	double	mouse_im;
+	t_complex	mouse;
+	double	real_range = fractal->max - fractal->min;
+	double	real_step = real_range / (S_WIDTH - 1);
+	double	im_step = real_range / (S_HEIGHT - 1);
 	
-	zoom_factor = 0.0;
-	mouse_real = (double)x / (S_WIDTH / (fractal->max - fractal->min)) + fractal->min + fractal->shift_x;
-	mouse_im = (double)y / (S_HEIGHT / (fractal->max - fractal->min)) + fractal->min + fractal->shift_y;
+	mouse_real = fractal->min + x * real_step + fractal->shift_x;
+	mouse_im = fractal->min + y * im_step + fractal->shift_y;
 	if (key == ZOOM_OUT)
-		zoom_factor = 0.9;
-	else if (key == ZOOM_IN)
 		zoom_factor = 1.1;
-	fractal->min = mouse_real - (mouse_real - fractal->min) * zoom_factor;
-	fractal->max = mouse_im + (fractal->max - mouse_im) * zoom_factor;
+	else if (key == ZOOM_IN)
+		zoom_factor = 0.9;
+	else 
+		return (0);
+	double	new_real_range = real_range / zoom_factor;
+	fractal->min = mouse.real - (mouse.real - (fractal->min + fractal->shift_x)) * (1.0 / zoom_factor);
+	fractal->max = fractal->min + new_real_range;
+	fractal->shift_x = 0;
+	double	new_im_center = mouse.im;
+	fractal->shift_y + new_im_center - (fractal->min + fractal->max) / 2;
 	fractal_render(fractal);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/04/07 16:11:52 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/11 17:07:45 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FRACT_OL_H
 
 //WINDOW
-# define S_HEIGHT	800
-# define S_WIDTH	800
+# define S_HEIGHT	1000
+# define S_WIDTH	1000
 
 # define ERROR_MESSAGE "ERROR\n"
 
@@ -36,6 +36,8 @@
 # define ONE		49
 # define TWO		50
 # define THREE		51
+# define RESET		114
+# define JULIA		106
 
 //COLORS
 # define BLACK	0x000000
@@ -70,6 +72,21 @@ typedef struct s_color
 	int		blue;
 }				t_color;
 
+//ZOOM
+typedef struct s_zoom
+{
+	double	zoom_factor; //how much zoom in and out is being made
+	double	real_range; //range of the real part visible in the axis(width)
+	double	im_range; //range of the im part in the axis(height)
+	double	real_step; //step size in the real axis to map from window coordinates to the fractal plane
+	double	im_step; //step size in the im axis to map winow coordinates to the fractal plane
+	double	mouse_real; //the real part of the mouse position in the fractal plane (x on screen)
+	double	mouse_im; //the im part of the mouse position in the fractal plane (y on screen)
+	double	new_real_range; //the new range of the real part of the complex plane after zooming
+	double	im_center; //the center of the im axis in the fractal plane
+	double	new_im_min; //the new min value os the im part after zooming
+}				t_zoom;
+
 //IMAGE
 typedef struct s_image
 {
@@ -96,10 +113,9 @@ typedef struct s_fractal
 	double		zoom;
 	double		max;
 	double		min;
-	// double		mouse_x;
-	// double		mouse_y;
 	t_complex	julia;
 	t_color		color;
+	t_zoom		mouse;
 	t_image		image;
 }				t_fractal;
 
@@ -107,11 +123,13 @@ typedef struct s_fractal
 int			main(int argc, char **argv);
 //PARSING
 int			error_message(void);
+void		key_instructions(t_fractal *fractal);
 void		fractal_parsing(int argc, char **argv, t_fractal *fractal);
 //MANDELBROT
 int			calculate_mandelbrot(double real, double im, t_fractal *fractal);
 //JULIA
 int			calculate_julia(double real, double im, t_fractal *fractal);
+void		julia_prespective(t_fractal *fractal);
 //BURNING SHIP
 int			calculate_burning_ship(double real, double im, t_fractal *fractal);
 //MATH_UTILS
@@ -129,6 +147,7 @@ void		fractal_render(t_fractal *fractal);
 void		events_init(t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 int			key_handler(int key, t_fractal *fractal);
+double		interpolate(double target, double current, double factor);
 int			mouse_handler(int x, int y, int key, t_fractal *fractal);
 //COLOR
 int			palette_1(t_fractal *fractal);

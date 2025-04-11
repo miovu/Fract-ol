@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:37:37 by miovu             #+#    #+#             */
-/*   Updated: 2025/03/24 18:28:12 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/11 17:08:01 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	fractal_render(t_fractal *fractal)
 	}
 	mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window,
 		fractal->image.img, 0, 0);
+	key_instructions(fractal);
 }

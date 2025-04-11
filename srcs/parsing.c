@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:19:03 by miovu             #+#    #+#             */
-/*   Updated: 2025/04/07 16:20:48 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/11 17:15:49 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,33 @@
 
 int	error_message(void)
 {
-	write(1, "\033[1;31mError!\n[0m", 14);
-	write(1, "\033[1;34mUsage:\n", 15);
-	write(1, "\033[0m\t./fract_ol <Chosen Fractal>\n", 33);
-	write(1, "\033[1;34mAvaliable Fractals:\n[0m", 27);
-	write(1, "\033[0m\t-Mandelbrot\n", 17);
-	write(1, "\033[0m\t-Burning Ship\n", 19);
-	write(1, "\033[0m\t-Julia\n", 12);
+	ft_printf("\033[1;31mError!\n[0m");
+	ft_printf("\033[1;34mUsage:\n");
+	ft_printf("\033[0m\t./fract_ol <Chosen Fractal>\n");
+	ft_printf("\033[1;34mAvailable Fractals:\n[0m");
+	ft_printf("\033[0m\t-Mandelbrot\n");
+	ft_printf("\033[0m\t-Burning Ship\n");
+	ft_printf("\033[0m\t-Julia\n");
 	exit(EXIT_FAILURE);
 	return (0);
+}
+
+void	key_instructions(t_fractal *fractal)
+{
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 40, WHITE,
+		"Arrow keys or WASD to move around");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 60, WHITE,
+		"'1' '2' '3' to change the color palette");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 80, WHITE,
+		"Mouse wheel to zoom in and out");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 100, WHITE,
+		"'R' to reset the view");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 120, WHITE,
+		"'+' to increase iterations");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 140, WHITE,
+		"'-' to decrease iterations");
+	mlx_string_put(fractal->mlx_connection, fractal->mlx_window, 18, 160, WHITE,
+		"'J' to change Julia's view");
 }
 
 void	fractal_parsing(int argc, char **argv, t_fractal *fractal)

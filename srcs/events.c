@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chillhoneyyy <chillhoneyyy@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:58:14 by miovu             #+#    #+#             */
-/*   Updated: 2025/04/11 17:14:00 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/11 19:56:42 by chillhoneyy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ int	close_handler(t_fractal *fractal)
 
 int	key_handler(int key, t_fractal *fractal)
 {
+	double range = fractal->max - fractal->min;
+	double step = range * 0.05; 
 	if (key == ESC)
 		close_handler(fractal);
 	else if (key == LEFT || key == A)
-		fractal->shift_x -= (0.5 * fractal->zoom / fractal->mouse.zoom_factor);
+		fractal->shift_x -= step;
 	else if (key == RIGHT || key == D)
-		fractal->shift_x += (0.5 * fractal->zoom / fractal->mouse.zoom_factor);
+		fractal->shift_x += step;
 	else if (key == UP || key == W)
-		fractal->shift_y -= (0.5 * fractal->zoom / fractal->mouse.zoom_factor);
+		fractal->shift_y -= step;
 	else if (key == DOWN || key == S)
-		fractal->shift_y += (0.5 * fractal->zoom / fractal->mouse.zoom_factor);
+		fractal->shift_y += step;
 	else if (key == PLUS)
 		fractal->iterations += 10;
 	else if (key == MINUS && fractal->iterations > 15)
@@ -66,14 +68,17 @@ double	interpolate(double target, double current, double factor)
 
 int	mouse_handler(int key, int x, int y, t_fractal *fractal)
 {
-	fractal->mouse.real_range = fractal->max - fractal->min;
-	fractal->mouse.im_range = fractal->mouse.real_range; // manter aspect ratio
-	fractal->mouse.real_step = fractal->mouse.real_range / (S_WIDTH - 1);
-	fractal->mouse.im_step = fractal->mouse.im_range / (S_HEIGHT - 1);
+
 	if (key == ZOOM_IN)
 		fractal->mouse.zoom_factor = 1.1;
 	else if (key == ZOOM_OUT)
 		fractal->mouse.zoom_factor = 0.9;
+	else 
+		return 0;
+	fractal->mouse.real_range = fractal->max - fractal->min;
+	fractal->mouse.im_range = fractal->mouse.real_range; // manter aspect ratio
+	fractal->mouse.real_step = fractal->mouse.real_range / (S_WIDTH - 1);
+	fractal->mouse.im_step = fractal->mouse.im_range / (S_HEIGHT - 1);
 	// Traduzir as coordenadas do rato para o plano complexo
 	fractal->mouse.mouse_real = fractal->min + x * fractal->mouse.real_step + fractal->shift_x;
 	fractal->mouse.mouse_im = fractal->min + y * fractal->mouse.im_step + fractal->shift_y;

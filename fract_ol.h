@@ -6,7 +6,7 @@
 /*   By: miovu <miovu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:17:12 by chillhoneyy       #+#    #+#             */
-/*   Updated: 2025/04/11 17:07:45 by miovu            ###   ########.fr       */
+/*   Updated: 2025/04/16 15:36:27 by miovu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ typedef struct s_color
 //ZOOM
 typedef struct s_zoom
 {
-	double	zoom_factor; //how much zoom in and out is being made
-	double	real_range; //range of the real part visible in the axis(width)
-	double	im_range; //range of the im part in the axis(height)
-	double	real_step; //step size in the real axis to map from window coordinates to the fractal plane
-	double	im_step; //step size in the im axis to map winow coordinates to the fractal plane
-	double	mouse_real; //the real part of the mouse position in the fractal plane (x on screen)
-	double	mouse_im; //the im part of the mouse position in the fractal plane (y on screen)
-	double	new_real_range; //the new range of the real part of the complex plane after zooming
-	double	im_center; //the center of the im axis in the fractal plane
-	double	new_im_min; //the new min value os the im part after zooming
+	double	zoom_factor;
+	double	real_range;
+	double	im_range;
+	double	real_step;
+	double	im_step;
+	double	mouse_real;
+	double	mouse_im;
+	double	new_real_range;
+	double	im_center;
+	double	new_im_min;
 }				t_zoom;
 
 //IMAGE
@@ -104,10 +104,10 @@ typedef struct s_fractal
 	int			type;
 	void		*mlx_connection;
 	void		*mlx_window;
-	int			iterations; //iterations definition
-	int			i; //number of interations
-	int			palette; //for color palettes
-	double		escape; //escape value
+	int			iterations;
+	int			i;
+	int			palette;
+	double		escape;
 	double		shift_x;
 	double		shift_y;
 	double		zoom;
@@ -146,7 +146,10 @@ void		fractal_render(t_fractal *fractal);
 //EVENTS
 void		events_init(t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
+void		shift(t_fractal *fractal, int key);
 int			key_handler(int key, t_fractal *fractal);
+//ZOOM
+void		zoom(t_fractal *fractal, int key);
 double		interpolate(double target, double current, double factor);
 int			mouse_handler(int x, int y, int key, t_fractal *fractal);
 //COLOR

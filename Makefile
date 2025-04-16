@@ -5,7 +5,7 @@ CFLAGS = -Wall -Werror -Wextra -g -O3 -march=native -flto -ftree-vectorize -funr
 MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 SOURCES_FILES = main.c init.c render.c math_utils.c mandelbrot.c julia.c \
-				parsing.c events.c color.c burning_ship.c
+				parsing.c events.c zoom.c color.c burning_ship.c
 				
 SRC = $(addprefix $(SRC_DIR)/, $(SOURCES_FILES))
 
